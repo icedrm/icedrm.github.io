@@ -1,0 +1,348 @@
+<!doctype html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>OneDrive免费扩容至15G | 冰刻无痕</title><meta name="author" content="冰梦"><meta name="copyright" content="冰梦"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="说明OneDrive 免费扩容至15G，扩容是官方提供的，不过你去找的时候，已经不存在了，这已经被官方隐藏了，虽然有人说科学上网就可以，但尝试了几次也没有看见，这里直接用他的cid来获取邀请链接。 我的推广链接：https://onedrive.live.com/?invref=5EE8854AC6E963C0&amp;invscr=90 获取邀请链接方式一win + R，输入以下命令： 1%lo"><meta property="og:type" content="article"><meta property="og:title" content="OneDrive免费扩容至15G"><meta property="og:url" content="https://icedrm.github.io/posts/38ed.html"><meta property="og:site_name" content="冰刻无痕"><meta property="og:description" content="说明OneDrive 免费扩容至15G，扩容是官方提供的，不过你去找的时候，已经不存在了，这已经被官方隐藏了，虽然有人说科学上网就可以，但尝试了几次也没有看见，这里直接用他的cid来获取邀请链接。 我的推广链接：https://onedrive.live.com/?invref=5EE8854AC6E963C0&amp;invscr=90 获取邀请链接方式一win + R，输入以下命令： 1%lo"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://jsd.onmicrosoft.cn/gh/eudav/bingm-static/img/computer/018.webp"><meta property="article:published_time" content="2024-11-17T15:12:27.000Z"><meta property="article:modified_time" content="2025-01-11T08:47:16.986Z"><meta property="article:author" content="冰梦"><meta property="article:tag" content="OneDrive"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://jsd.onmicrosoft.cn/gh/eudav/bingm-static/img/computer/018.webp"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://icedrm.github.io/posts/38ed.html"><link rel="preconnect"><link rel="preconnect" href="//hm.baidu.com"><link rel="manifest" href="/manifest.json"><link rel="apple-touch-icon" sizes="180x180" href="/img/siteicon/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/img/siteicon/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/img/siteicon/favicon-16x16.png"><link rel="mask-icon" href="/img/siteicon/apple-touch-icon.png" color="#5bbad5"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://npm.onmicrosoft.cn/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://npm.onmicrosoft.cn/node-snackbar/dist/snackbar.min.css" media="print" onload='this.media="all"'><link rel="stylesheet" href="https://npm.onmicrosoft.cn/@fancyapps/ui/dist/fancybox/fancybox.css" media="print" onload='this.media="all"'><script>(() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()</script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?ef832811ada62c5e8a9972ba80c825c0";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+btf.addGlobalFn('pjaxComplete', () => {
+  _hmt.push(['_trackPageview',window.location.pathname])
+}, 'baidu_analytics')</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"ISDJ00QU43","apiKey":"487b1ffc0003ed6c3522ba6747b1d1e9","indexName":"hexo","hitsPerPage":6,"languages":{"input_placeholder":"搜索文章","hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，耗时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 冰梦","link":"链接: ","source":"来源: 冰刻无痕","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"已切换为繁体中文","cht_to_chs":"已切换为简体中文","day_to_night":"已切换为深色模式","night_to_day":"已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"top-center"},
+  infinitegrid: {
+    js: 'https://npm.onmicrosoft.cn/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE={title:"OneDrive免费扩容至15G",isPost:!0,isHome:!1,isHighlightShrink:!1,isToc:!0,isShuoshuo:!1}</script><meta name="generator" content="Hexo 7.3.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')</script><link rel="stylesheet" href="https://npm.onmicrosoft.cn/pace-js/themes/blue/pace-theme-minimal.css"><script src="https://npm.onmicrosoft.cn/pace-js/pace.min.js"></script><div id="web_bg" style="background-image:url(https://api.boxmoe.com/random.php?size=large)"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/loading.webp" data-lazy-src="https://q1.qlogo.cn/g?b=qq&amp;nk=1580777927&amp;s=5" onerror='onerror=null,src="/img/friend_404.gif"' alt="avatar"></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><span class="site-page group"><span>文 章</span></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fa-fw fas fa-archive"></i> <span>归档</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fa-fw fas fa-folder-open"></i> <span>分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa-fw fas fa-tags"></i> <span>标签</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><span>社 交</span></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i> <span>友链</span></a></li><li><a class="site-page child" href="/fcircles/"><i class="fa-fw fa-brands fa-artstation"></i> <span>朋友圈</span></a></li><li><a class="site-page child" href="/comments/"><i class="fa-fw fa-fw fas fa-comment"></i> <span>留言板</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><span>个 人</span></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/?id=7657374410&amp;server=tencent"><i class="fa-fw fa-fw fas fa-music"></i> <span>音乐</span></a></li><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fa-fw fa-brands fa-bilibili"></i> <span>追番</span></a></li><li><a class="site-page child" href="/album/"><i class="fa-fw fa-fw fas fa-images"></i> <span>相册</span></a></li><li><a class="site-page child" href="/collect/"><i class="fa-fw fa-fw fas fa-star"></i> <span>收藏</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><span>关 于</span></span><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fa-fw fas fa-user"></i> <span>关于我</span></a></li><li><a class="site-page child" href="/essay/"><i class="fa-fw fas fa-pen"></i> <span>随笔</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image:url(https://jsd.onmicrosoft.cn/gh/eudav/bingm-static/img/computer/018.webp)"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">冰刻无痕</span></a></span><div class="mask-name-container"><center id="name-container"><a class="nav-site-title" href="javascript:btf.scrollToDest();"><span class="site-name">OneDrive免费扩容至15G</span></a></center></div><div id="menus"><div class="menus_items"><div class="menus_item"><span class="site-page group"><span>文 章</span></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fa-fw fas fa-archive"></i> <span>归档</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fa-fw fas fa-folder-open"></i> <span>分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa-fw fas fa-tags"></i> <span>标签</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><span>社 交</span></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i> <span>友链</span></a></li><li><a class="site-page child" href="/fcircles/"><i class="fa-fw fa-brands fa-artstation"></i> <span>朋友圈</span></a></li><li><a class="site-page child" href="/comments/"><i class="fa-fw fa-fw fas fa-comment"></i> <span>留言板</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><span>个 人</span></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/?id=7657374410&amp;server=tencent"><i class="fa-fw fa-fw fas fa-music"></i> <span>音乐</span></a></li><li><a class="site-page child" href="/bangumis/"><i class="fa-fw fa-fw fa-brands fa-bilibili"></i> <span>追番</span></a></li><li><a class="site-page child" href="/album/"><i class="fa-fw fa-fw fas fa-images"></i> <span>相册</span></a></li><li><a class="site-page child" href="/collect/"><i class="fa-fw fa-fw fas fa-star"></i> <span>收藏</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><span>关 于</span></span><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="fa-fw fa-fw fas fa-user"></i> <span>关于我</span></a></li><li><a class="site-page child" href="/essay/"><i class="fa-fw fas fa-pen"></i> <span>随笔</span></a></li></ul></div></div><div id="search-button"><span class="site-page social-icon search" title=" 搜索"><i class="fas fa-search fa-fw"></i></span></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></nav><div id="post-info"><h1 class="post-title">OneDrive免费扩容至15G</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-11-17T15:12:27.000Z" title="发表于 2024-11-17 23:12:27">2024-11-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-01-11T08:47:16.986Z" title="更新于 2025-01-11 16:47:16">2025-01-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">188</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:30,&quot;messagePrev&quot;:&quot;距离上次更新已经过去&quot;,&quot;messageNext&quot;:&quot;天了，文章内容可能已经过时。若内容或图片失效，请留言反馈（部分素材来自网络）。&quot;,&quot;postUpdate&quot;:&quot;2025-01-11 16:47:16&quot;}" hidden></div><h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>OneDrive 免费扩容至15G，扩容是官方提供的，不过你去找的时候，已经不存在了，这已经被官方隐藏了，虽然有人说科学上网就可以，但尝试了几次也没有看见，这里直接用他的<code>cid</code>来获取邀请链接。</p><p>我的推广链接：<a target="_blank" rel="noopener" href="https://onedrive.live.com/?invref=5EE8854AC6E963C0&amp;invscr=90">https://onedrive.live.com/?invref=5EE8854AC6E963C0&amp;invscr=90</a></p><h2 id="获取邀请链接"><a href="#获取邀请链接" class="headerlink" title="获取邀请链接"></a>获取邀请链接</h2><h3 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h3><p>win + R，输入以下命令：</p><figure class="highlight powershell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%localappdata%\Microsoft\OneDrive\settings\Personal\global.ini</span><br></pre></td></tr></tbody></table></figure><p>找到并选择<code>cid=5ee8854ac6e963c0</code></p><p><img src="/img/loading.webp" data-lazy-src="https://s2.loli.net/2024/11/18/eb9CQTaXZAU48uO.png" alt="cid获取"></p><h3 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h3><p>直接在浏览器上登录OneDrive云盘，就可以在OneDrive中的链接看到<code>cid</code>的参数</p><p><img src="/img/loading.webp" data-lazy-src="https://s2.loli.net/2024/11/18/bhMeBmnQduER8Xi.png" alt="OneDrive链接"></p><p>推广链接：<a target="_blank" rel="noopener" href="https://onedrive.live.com/?invref=5EE8854AC6E963C0&amp;invscr=90">https://onedrive.live.com/?invref=5EE8854AC6E963C0&amp;invscr=90</a></p><p>把<code>invref=5EE8854AC6E963C0</code>后面的改为你自己的，例：<code>invref=xxxxxxxxxxxxxxxx</code>。</p><h3 id="推广扩容预览"><a href="#推广扩容预览" class="headerlink" title="推广扩容预览"></a>推广扩容预览</h3><p><img src="/img/loading.webp" data-lazy-src="https://s2.loli.net/2024/11/18/aqtKD4Gj87TIRwV.webp" alt="推广预览"></p></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者:</span> <span class="post-copyright-info"><a href="https://icedrm.github.io">冰梦</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接:</span> <span class="post-copyright-info"><a href="https://icedrm.github.io/posts/38ed.html">https://icedrm.github.io/posts/38ed.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明:</span> <span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://icedrm.github.io" target="_blank">冰刻无痕</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/OneDrive/">OneDrive</a></div><div class="post-share"><div class="social-share" data-image="https://jsd.onmicrosoft.cn/gh/eudav/bingm-static/img/computer/018.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://npm.onmicrosoft.cn/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload='this.media="all"'><script src="https://npm.onmicrosoft.cn/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.webp" target="_blank"><img class="post-qr-code-img" src="/img/loading.webp" data-lazy-src="/img/wechat.webp" alt="微信"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.webp" target="_blank"><img class="post-qr-code-img" src="/img/loading.webp" data-lazy-src="/img/alipay.webp" alt="支付宝"></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/posts/3eeb.html" title="Hello World"><img class="cover" src="/img/loading.webp" data-lazy-src="https://gcore.jsdelivr.net/npm/ushio-api-img-moe@5.0.30/img_302_1920x1080_72_null_normal.jpg" onerror='onerror=null,src="/img/404.png"' alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Hello World</div></div><div class="info-2"><div class="info-item-1">hello world</div></div></div></a><a class="pagination-related" href="/posts/69cf.html" title="pixel机时间无法同步解决"><img class="cover" src="/img/loading.webp" data-lazy-src="https://npm.elemecdn.com/ushio-api-img-moe@5.0.40/img_403_3507x2037_72_null_normal.jpg" onerror='onerror=null,src="/img/404.png"' alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">pixel机时间无法同步解决</div></div><div class="info-2"><div class="info-item-1">实用中发现pixel机时间同步功能无法正常实用，这里分享一下解决办法。</div></div></div></a></nav><hr class="custom-hr"><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i> <span>评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/loading.webp" data-lazy-src="https://q1.qlogo.cn/g?b=qq&amp;nk=1580777927&amp;s=5" onerror='this.onerror=null,this.src="/img/friend_404.gif"' alt="avatar"></div><div class="author-info-name">冰梦</div><div class="author-info-description"><div style="line-height:1.38;margin:.6rem 0;text-align:center;font-family:fangsong">到不了的都叫远方，回不去的都叫故乡。</div></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" href="/about/"><i class="fas fa-arrow-circle-right"></i><span>了解更多</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><div><a style="display:flex;height:100%;width:100%" target="_blank" rel="noopener" href="https://hcer.top"><img style="height:100%;width:100%" src="/img/loading.webp" data-lazy-src="https://jsd.onmicrosoft.cn/gh/eudav/bingm-static/img/hcer.webp" alt="https://hcer.top"></a></div><b>GitHub站点：</b><a target="_blank" rel="noopener" href="https://icemyst.github.io">https://icemyst.github.io</a><div>CDN赞助者：@xinpro(鸣谢)</div><div>赞助者博客：<a target="_blank" rel="noopener" href="https://xinpro.cn">https://xinpro.cn</a></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%B4%E6%98%8E"><span class="toc-number">1.</span> <span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E9%82%80%E8%AF%B7%E9%93%BE%E6%8E%A5"><span class="toc-number">2.</span> <span class="toc-text">获取邀请链接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80"><span class="toc-number">2.1.</span> <span class="toc-text">方式一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C"><span class="toc-number">2.2.</span> <span class="toc-text">方式二</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E5%B9%BF%E6%89%A9%E5%AE%B9%E9%A2%84%E8%A7%88"><span class="toc-number">2.3.</span> <span class="toc-text">推广扩容预览</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/3eeb.html" title="Hello World"><img src="/img/loading.webp" data-lazy-src="https://gcore.jsdelivr.net/npm/ushio-api-img-moe@5.0.30/img_302_1920x1080_72_null_normal.jpg" onerror='this.onerror=null,this.src="/img/404.png"' alt="Hello World"></a><div class="content"><a class="title" href="/posts/3eeb.html" title="Hello World">Hello World</a><time datetime="2024-12-05T03:55:06.000Z" title="发表于 2024-12-05 11:55:06">2024-12-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/38ed.html" title="OneDrive免费扩容至15G"><img src="/img/loading.webp" data-lazy-src="https://jsd.onmicrosoft.cn/gh/eudav/bingm-static/img/computer/018.webp" onerror='this.onerror=null,this.src="/img/404.png"' alt="OneDrive免费扩容至15G"></a><div class="content"><a class="title" href="/posts/38ed.html" title="OneDrive免费扩容至15G">OneDrive免费扩容至15G</a><time datetime="2024-11-17T15:12:27.000Z" title="发表于 2024-11-17 23:12:27">2024-11-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/69cf.html" title="pixel机时间无法同步解决"><img src="/img/loading.webp" data-lazy-src="https://npm.elemecdn.com/ushio-api-img-moe@5.0.40/img_403_3507x2037_72_null_normal.jpg" onerror='this.onerror=null,this.src="/img/404.png"' alt="pixel机时间无法同步解决"></a><div class="content"><a class="title" href="/posts/69cf.html" title="pixel机时间无法同步解决">pixel机时间无法同步解决</a><time datetime="2024-10-27T13:36:47.000Z" title="发表于 2024-10-27 21:36:47">2024-10-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/3d94.html" title="hexo+butterfly 主题标签使用"><img src="/img/loading.webp" data-lazy-src="https://npm.elemecdn.com/ushio-api-img-moe@5.0.36/img_365_2615x1200_96_null_normal.jpg" onerror='this.onerror=null,this.src="/img/404.png"' alt="hexo+butterfly 主题标签使用"></a><div class="content"><a class="title" href="/posts/3d94.html" title="hexo+butterfly 主题标签使用">hexo+butterfly 主题标签使用</a><time datetime="2020-11-14T07:55:44.000Z" title="发表于 2020-11-14 15:55:44">2020-11-14</time></div></div></div></div></div></div></main><footer id="footer" style="background:0 0"><div id="footer-wrap"><div class="copyright">©2019 - 2025&nbsp;<svg style="width:1.25em;height:1.25em;vertical-align:middle" aria-hidden="true"><use xlink:href="#icon-Butterfly"></use></svg>&nbsp;冰梦</div><div class="framework-info"><span>框架</span> <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题</span> <a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div id="workboard"><img class="workSituationImg"><div id="runtimeTextTip">本站已苟活&nbsp;<span id="runtime-days">0</span>&nbsp;天&nbsp;<span id="runtime-hours">00</span>&nbsp;小时&nbsp;<span id="runtime-minutes">00</span>&nbsp;分&nbsp;<span id="runtime-seconds">00</span>&nbsp;秒&nbsp;</div></div><script>(() => {
+  const config = {
+    launchTime: "04/01/2022 00:00:00",
+    workHours: { start: 9, end: 18 },
+    images: { work: "https://jsd.onmicrosoft.cn/gh/eudav/bingm-static/img/icon/冰梦-上班摸鱼中-6adea8.svg", offduty: "https://jsd.onmicrosoft.cn/gh/eudav/bingm-static/img/icon/冰梦-下班休息中-6adea8.svg" },
+    descriptions: { work: "一个还在学习的萌新", offduty: "下班了就该开开心心的玩耍，嘿嘿~" }
+  };
+
+  const elements = {
+    days: document.getElementById("runtime-days"),
+    hours: document.getElementById("runtime-hours"),
+    minutes: document.getElementById("runtime-minutes"),
+    seconds: document.getElementById("runtime-seconds"),
+    img: document.querySelector(".workSituationImg")
+  };
+
+  const updateRuntime = () => {
+    try {
+      const now = new Date();
+      const launch = new Date(config.launchTime);
+      if (isNaN(launch.getTime())) throw new Error('无效的启动时间');
+
+      const elapsed = Math.floor((now - launch) / 1000);
+      const times = {
+        days: Math.floor(elapsed / 86400),
+        hours: Math.floor((elapsed % 86400) / 3600),
+        minutes: Math.floor((elapsed % 3600) / 60),
+        seconds: elapsed % 60
+      };
+
+      // 更新时间显示
+      Object.entries(times).forEach(([key, value]) => {
+        elements[key].textContent = key === 'days' ? value : String(value).padStart(2, '0');
+      });
+
+      // 更新工作状态图片
+      if (elements.img) {
+        const hour = now.getHours();
+        const status = (hour >= config.workHours.start && hour < config.workHours.end) ? 'work' : 'offduty';
+        Object.assign(elements.img, {
+          src: config.images[status],
+          title: config.descriptions[status],
+          alt: config.descriptions[status]
+        });
+      }
+    } catch (error) {
+      console.error("运行时间更新失败:", error);
+    }
+  };
+
+  updateRuntime();
+  setInterval(updateRuntime, 1000);
+})();</script><div class="wordcount"><i class="fas fa-pencil-alt"></i><span>冰梦已经写了 1.1W 字，还在努力更新中... 加油！加油啦！</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://npm.onmicrosoft.cn/hexo-theme-butterfly/source/js/utils.js"></script><script src="https://npm.onmicrosoft.cn/hexo-theme-butterfly/source/js/main.js"></script><script src="https://npm.onmicrosoft.cn/hexo-theme-butterfly/source/js/tw_cn.js"></script><script src="https://npm.onmicrosoft.cn/@fancyapps/ui/dist/fancybox/fancybox.umd.js"></script><script src="https://npm.onmicrosoft.cn/instant.page/instantpage.js" type="module"></script><script src="https://npm.onmicrosoft.cn/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://npm.onmicrosoft.cn/node-snackbar/dist/snackbar.min.js"></script><script>(() => {
+  const panguFn = () => {
+    if (typeof pangu === 'object') pangu.autoSpacingPage()
+    else {
+      btf.getScript('https://npm.onmicrosoft.cn/pangu/dist/browser/pangu.min.js')
+        .then(() => {
+          pangu.autoSpacingPage()
+        })
+    }
+  }
+
+  const panguInit = () => {
+    if (false){
+      GLOBAL_CONFIG_SITE.isPost && panguFn()
+    } else {
+      panguFn()
+    }
+  }
+
+  btf.addGlobalFn('pjaxComplete', panguInit, 'pangu')
+  document.addEventListener('DOMContentLoaded', panguInit)
+})()</script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.isShuoshuo
+  const option = null
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.abeginner.top/.netlify/functions/twikoo',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const init = (el = document, path = location.pathname) => {
+    twikoo.init({
+      el: el.querySelector('#twikoo-wrap'),
+      envId: 'https://twikoo.abeginner.top/.netlify/functions/twikoo',
+      region: '',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      },
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+
+    isShuoshuo && (window.shuoshuoComment.destroyTwikoo = () => {
+      if (el.children.length) {
+        el.innerHTML = ''
+        el.classList.add('no-comment')
+      }
+    })
+  }
+
+  const loadTwikoo = (el, path) => {
+    if (typeof twikoo === 'object') setTimeout(() => init(el, path), 0)
+    else btf.getScript('https://npm.onmicrosoft.cn/twikoo/dist/twikoo.all.min.js').then(() => init(el, path))
+  }
+
+  if (isShuoshuo) {
+    'Twikoo' === 'Twikoo'
+      ? window.shuoshuoComment = { loadComment: loadTwikoo }
+      : window.loadOtherComment = loadTwikoo
+    return
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><script async src="//at.alicdn.com/t/font_2032782_8ns648avijk.js"></script><script src="https://npm.onmicrosoft.cn/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      pjax.loadUrl('/404.html')
+    }
+  })
+})()</script><script async data-pjax="" src="https://vercount.one/js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://npm.onmicrosoft.cn/algoliasearch/dist/lite/builds/browser.umd.js"></script><script src="https://npm.onmicrosoft.cn/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="https://npm.onmicrosoft.cn/hexo-theme-butterfly/source/js/search/algolia.js"></script></div></div><script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js')
+    .then(registration => {
+      console.log('ServiceWorker 注册成功:', registration.scope);
+      
+      if (localStorage.getItem('install') !== 'true') {
+        localStorage.setItem('install', 'true');
+        window.location.reload();
+      }
+      
+      registration.addEventListener('updatefound', () => {
+        const newWorker = registration.installing;
+        newWorker.addEventListener('statechange', () => {
+          if (newWorker.state === 'installed') {
+            if (navigator.serviceWorker.controller) {
+              console.log('发现新版本,准备更新...');
+            }
+          }
+        });
+      });
+    })
+    .catch(error => {
+      console.error('ServiceWorker 注册失败:', error);
+    });
+  
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    console.log('页面已更新到新版本');
+  });
+}</script></body></html>
